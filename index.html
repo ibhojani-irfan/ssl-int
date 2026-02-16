@@ -1,236 +1,578 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Secure Digital Twin Deployment | Partnership Pitch</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Industrial Digital Twin Cybersecurity | Partnership Pitch</title>
+  <meta name="description" content="Attack vectors in OT/SCADA industries, product overview, and security offering aligned to risk." />
 
-<script src="https://cdn.tailwindcss.com"></script>
-
-<style>
-html { scroll-behavior:smooth; }
-
-body {
-  background: linear-gradient(180deg,#0b1220 0%, #0f172a 60%, #0b1220 100%);
-}
-
-.glass {
-  background: rgba(255,255,255,0.04);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-.pill {
-  border: 1px solid rgba(255,255,255,0.12);
-}
-
-.accent {
-  color:#4f9cff;
-}
-
-.accent-bg {
-  background:#4f9cff;
-}
-
-.soft-accent {
-  background:rgba(79,156,255,0.12);
-  border:1px solid rgba(79,156,255,0.35);
-}
-
-.green-accent {
-  color:#10b981;
-}
-
-</style>
+  <!-- Tailwind (CDN is fine for GitHub Pages demos) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .glass { background: rgba(255,255,255,0.06); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.10); }
+    .gridlines {
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 42px 42px;
+    }
+    .shadow-soft { box-shadow: 0 18px 50px rgba(0,0,0,0.35); }
+    .pill { border: 1px solid rgba(255,255,255,0.14); }
+    .kbd { border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); }
+  </style>
 </head>
 
-<body class="text-slate-200 font-light tracking-wide">
+<body class="bg-slate-950 text-slate-100">
+  <!-- Top bar -->
+  <header class="sticky top-0 z-50 bg-slate-950/80 border-b border-white/10">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center">
+          <!-- shield icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="opacity-90">
+            <path d="M12 2l8 4v6c0 5-3.2 9.4-8 10-4.8-.6-8-5-8-10V6l8-4z" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M9 12l2 2 4-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="text-sm font-semibold leading-tight">Industrial Cybersecurity for Digital Twins</div>
+          <div class="text-xs text-slate-300">Attack vectors → Product touchpoints → Controls</div>
+        </div>
+      </div>
 
-<header class="sticky top-0 bg-[#0b1220]/90 border-b border-white/10 z-50">
-  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-    <div>
-      <div class="text-sm uppercase text-slate-400 tracking-widest">Industrial Cybersecurity</div>
-      <div class="text-lg font-semibold accent">Secure Digital Twin Deployment</div>
+      <nav class="hidden md:flex items-center gap-2 text-xs">
+        <a class="px-3 py-2 rounded-lg hover:bg-white/5" href="#attack">Attack Vectors</a>
+        <a class="px-3 py-2 rounded-lg hover:bg-white/5" href="#product">Product Overview</a>
+        <a class="px-3 py-2 rounded-lg hover:bg-white/5" href="#mapping">Risk → Control Map</a>
+        <a class="px-3 py-2 rounded-lg hover:bg-white/5" href="#offer">My Offering</a>
+        <a class="px-3 py-2 rounded-lg hover:bg-white/5" href="#plan">30-min Flow</a>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <button id="presentBtn" class="text-xs px-3 py-2 rounded-lg bg-white/10 hover:bg-white/15 pill">
+          Presentation Mode
+        </button>
+      </div>
     </div>
-    <nav class="hidden md:flex gap-6 text-sm text-slate-400">
-      <a href="#risk" class="hover:text-white">Attack Vectors</a>
-      <a href="#product" class="hover:text-white">Product View</a>
-      <a href="#solution" class="hover:text-white">My Approach</a>
-      <a href="#plan" class="hover:text-white">Meeting Flow</a>
-    </nav>
-  </div>
-</header>
+  </header>
 
-<!-- HERO -->
-<section class="max-w-6xl mx-auto px-6 py-20">
-  <div class="glass rounded-3xl p-12">
-    <h1 class="text-4xl md:text-5xl font-semibold leading-tight">
-      I Help Make Digital Twins Safe to Connect to SCADA
-    </h1>
+  <!-- Hero -->
+  <section class="gridlines">
+    <div class="max-w-6xl mx-auto px-4 py-14">
+      <div class="glass shadow-soft rounded-3xl p-8 md:p-10">
+        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+          <div class="max-w-2xl">
+            <div class="inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full bg-white/10 pill">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              OT / SCADA / PLC environments • Utilities • Oil & Gas • Power
+            </div>
+            <h1 class="mt-4 text-3xl md:text-5xl font-semibold tracking-tight">
+              Make Digital Twins Safe to Deploy in Critical Infrastructure
+            </h1>
+            <p class="mt-4 text-slate-300 leading-relaxed">
+              Your clients ask: <span class="text-slate-100 font-medium">“Is this safe to connect to SCADA?”</span><br/>
+              This page shows: <span class="text-slate-100 font-medium">common attack vectors</span>, a quick view of
+              <span class="text-slate-100 font-medium">VariSim-like digital twin deployments</span>, and the
+              <span class="text-slate-100 font-medium">security controls + assurance pack</span> I deliver so you can sell confidently in the GCC.
+            </p>
 
-    <p class="mt-6 text-slate-400 max-w-3xl leading-relaxed">
-      When your clients ask about cybersecurity, they are not asking for a generic IT solution.
-      They are asking whether connecting a real-time digital twin to SCADA creates risk.
-      <span class="text-white font-medium">I help you answer that confidently.</span>
+            <div class="mt-6 flex flex-wrap gap-2 text-xs">
+              <span class="px-3 py-2 rounded-lg bg-white/5 pill">SCADA / DCS integration</span>
+              <span class="px-3 py-2 rounded-lg bg-white/5 pill">Cloud & web dashboards</span>
+              <span class="px-3 py-2 rounded-lg bg-white/5 pill">Operator training environments</span>
+              <span class="px-3 py-2 rounded-lg bg-white/5 pill">Data hub (GIS / assets / telemetry)</span>
+              <span class="px-3 py-2 rounded-lg bg-white/5 pill">Leak detection & optimisation</span>
+            </div>
+
+            <div class="mt-7 flex flex-wrap items-center gap-3 text-xs text-slate-300">
+              <span class="kbd px-2 py-1 rounded">Tip:</span>
+              Use <span class="text-slate-100">⌘/Ctrl + L</span> in the browser to zoom text; click sections to jump.
+            </div>
+          </div>
+
+          <div class="md:w-[360px] space-y-3">
+            <div class="glass rounded-2xl p-5">
+              <div class="text-xs text-slate-300">Outcome</div>
+              <div class="mt-1 text-lg font-semibold">Turn “Cyber Questions” into a Repeatable Offering</div>
+              <ul class="mt-3 space-y-2 text-sm text-slate-300">
+                <li class="flex gap-2"><span class="text-emerald-400">•</span> Secure deployment blueprint for OT/IT convergence</li>
+                <li class="flex gap-2"><span class="text-emerald-400">•</span> Identity + privileged access controls for engineers & vendors</li>
+                <li class="flex gap-2"><span class="text-emerald-400">•</span> Digital twin integrity, monitoring & audit readiness</li>
+              </ul>
+            </div>
+
+            <div class="glass rounded-2xl p-5">
+              <div class="text-xs text-slate-300">Suggested close</div>
+              <div class="mt-1 text-sm text-slate-200 leading-relaxed">
+                “We’ll package this as <span class="font-semibold">Secure-by-Design Deployment</span> for every client.
+                You keep focus on engineering outcomes; I handle security and compliance.”
+              </div>
+            </div>
+
+            <a href="#plan" class="block text-center text-xs px-4 py-3 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/20 pill">
+              Jump to 30-minute talk track →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Attack vectors -->
+  <section id="attack" class="max-w-6xl mx-auto px-4 py-14">
+    <div class="flex items-end justify-between gap-6">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-semibold">1) Common Attack Vectors in OT / Utilities</h2>
+        <p class="mt-2 text-slate-300 max-w-3xl">
+          These are the patterns that repeatedly show up in water, oil & gas, and power environments where SCADA/PLC systems
+          are connected to IT and cloud services.
+        </p>
+      </div>
+      <div class="hidden md:block text-xs text-slate-400">Goal: show you understand their client reality</div>
+    </div>
+
+    <div class="mt-8 grid md:grid-cols-3 gap-4">
+      <!-- Card -->
+      <div class="glass rounded-2xl p-5">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+            <span class="text-lg">🔑</span>
+          </div>
+          <div>
+            <div class="font-semibold">Identity & Credential Abuse</div>
+            <div class="text-xs text-slate-400">shared accounts • weak MFA • vendor access</div>
+          </div>
+        </div>
+        <ul class="mt-4 text-sm text-slate-300 space-y-2">
+          <li>Compromised engineer credentials → privileged access in OT</li>
+          <li>Shared admin accounts on SCADA apps / jump hosts</li>
+          <li>Remote vendors with broad, persistent access</li>
+        </ul>
+      </div>
+
+      <div class="glass rounded-2xl p-5">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+            <span class="text-lg">🌐</span>
+          </div>
+          <div>
+            <div class="font-semibold">OT/IT Convergence & Pivoting</div>
+            <div class="text-xs text-slate-400">DMZ gaps • flat networks • weak segmentation</div>
+          </div>
+        </div>
+        <ul class="mt-4 text-sm text-slate-300 space-y-2">
+          <li>Compromise IT → move laterally into OT</li>
+          <li>Digital twin becomes a bridge to SCADA data</li>
+          <li>Misconfigured firewalls/ACLs expose control networks</li>
+        </ul>
+      </div>
+
+      <div class="glass rounded-2xl p-5">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+            <span class="text-lg">🧪</span>
+          </div>
+          <div>
+            <div class="font-semibold">Data / Model Manipulation</div>
+            <div class="text-xs text-slate-400">telemetry injection • config tampering • ML poisoning</div>
+          </div>
+        </div>
+        <ul class="mt-4 text-sm text-slate-300 space-y-2">
+          <li>False telemetry → wrong leak alarms / missed events</li>
+          <li>Asset/config changes → inaccurate digital twin outputs</li>
+          <li>ML forecasting poisoning → bad operational decisions</li>
+        </ul>
+      </div>
+
+      <div class="glass rounded-2xl p-5">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+            <span class="text-lg">☁️</span>
+          </div>
+          <div>
+            <div class="font-semibold">Cloud & Web App Risks</div>
+            <div class="text-xs text-slate-400">API exposure • misconfig • account takeover</div>
+          </div>
+        </div>
+        <ul class="mt-4 text-sm text-slate-300 space-y-2">
+          <li>Web dashboards accessible via browser</li>
+          <li>APIs and integrations expose sensitive network info</li>
+          <li>Misconfigured storage/logging leaks operational data</li>
+        </ul>
+      </div>
+
+      <div class="glass rounded-2xl p-5">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+            <span class="text-lg">🎯</span>
+          </div>
+          <div>
+            <div class="font-semibold">Ransomware & Disruption</div>
+            <div class="text-xs text-slate-400">availability • incident response • recovery</div>
+          </div>
+        </div>
+        <ul class="mt-4 text-sm text-slate-300 space-y-2">
+          <li>Operational visibility loss (dashboards / historian)</li>
+          <li>Recovery gaps: backups, restore testing, golden images</li>
+          <li>OT safety + business continuity impacts</li>
+        </ul>
+      </div>
+
+      <div class="glass rounded-2xl p-5">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+            <span class="text-lg">📜</span>
+          </div>
+          <div>
+            <div class="font-semibold">Compliance & Audit Pressure (GCC)</div>
+            <div class="text-xs text-slate-400">NESA/DESC/ISR/NCA • ISO • IEC 62443</div>
+          </div>
+        </div>
+        <ul class="mt-4 text-sm text-slate-300 space-y-2">
+          <li>Security architecture evidence required in tenders</li>
+          <li>Vendor risk and third-party assurance obligations</li>
+          <li>Need a repeatable “secure deployment” pack</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product overview -->
+  <section id="product" class="max-w-6xl mx-auto px-4 py-14">
+    <div class="glass rounded-3xl p-8 md:p-10">
+      <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+        <div class="max-w-3xl">
+          <h2 class="text-2xl md:text-3xl font-semibold">2) Quick Product Overview (What Clients Deploy)</h2>
+          <p class="mt-2 text-slate-300">
+            VariSim-style deployments typically include: a real-time simulation engine, a data hub (asset + GIS + telemetry),
+            web dashboards, leak detection/optimisation modules, and an operator training simulator that can mirror control screens.
+          </p>
+
+          <!-- Diagram -->
+          <div class="mt-6 glass rounded-2xl p-6">
+            <div class="text-xs text-slate-400 mb-3">Typical deployment touchpoints</div>
+            <div class="grid md:grid-cols-5 gap-3 text-sm">
+              <div class="rounded-xl bg-white/5 p-4 pill">
+                <div class="font-semibold">SCADA / DCS</div>
+                <div class="text-xs text-slate-400 mt-1">telemetry • control context</div>
+              </div>
+              <div class="rounded-xl bg-white/5 p-4 pill">
+                <div class="font-semibold">APIs</div>
+                <div class="text-xs text-slate-400 mt-1">integration layer</div>
+              </div>
+              <div class="rounded-xl bg-white/5 p-4 pill">
+                <div class="font-semibold">GIS</div>
+                <div class="text-xs text-slate-400 mt-1">map • assets</div>
+              </div>
+              <div class="rounded-xl bg-white/5 p-4 pill">
+                <div class="font-semibold">Data Hub</div>
+                <div class="text-xs text-slate-400 mt-1">historian • points of interest</div>
+              </div>
+              <div class="rounded-xl bg-white/5 p-4 pill">
+                <div class="font-semibold">Web Dashboard</div>
+                <div class="text-xs text-slate-400 mt-1">operators • engineers</div>
+              </div>
+            </div>
+
+            <div class="mt-4 text-xs text-slate-400">
+              Security takeaway: the digital twin sits in the “middle” — it must be isolated and governed so it never becomes a pivot path into OT.
+            </div>
+          </div>
+        </div>
+
+        <div class="md:w-[360px] space-y-3">
+          <div class="rounded-2xl bg-white/5 p-5 pill">
+            <div class="text-xs text-slate-400">What attackers target</div>
+            <ul class="mt-3 text-sm text-slate-300 space-y-2">
+              <li><span class="text-slate-100 font-medium">Integrations</span> (SCADA/APIs) to inject or exfiltrate data</li>
+              <li><span class="text-slate-100 font-medium">Web access</span> to take over accounts & dashboards</li>
+              <li><span class="text-slate-100 font-medium">Model integrity</span> to cause wrong decisions</li>
+              <li><span class="text-slate-100 font-medium">Operator training</span> to abuse privileged workflows</li>
+            </ul>
+          </div>
+
+          <div class="rounded-2xl bg-white/5 p-5 pill">
+            <div class="text-xs text-slate-400">Your message</div>
+            <div class="mt-2 text-sm text-slate-200 leading-relaxed">
+              “We keep engineering outcomes strong while wrapping a secure-by-design deployment model around the product,
+              so utilities can connect it to SCADA with confidence.”
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mapping -->
+  <section id="mapping" class="max-w-6xl mx-auto px-4 py-14">
+    <h2 class="text-2xl md:text-3xl font-semibold">3) Attack Vector → Product Touchpoint → Control</h2>
+    <p class="mt-2 text-slate-300 max-w-4xl">
+      This is the core “partner story”: your solution maps directly to the risks created by digital twin deployments in OT environments.
     </p>
 
-    <div class="mt-8 flex flex-wrap gap-3 text-sm">
-      <span class="pill px-4 py-2 rounded-xl bg-white/5">SCADA / DCS Integration</span>
-      <span class="pill px-4 py-2 rounded-xl bg-white/5">Cloud & Web Dashboards</span>
-      <span class="pill px-4 py-2 rounded-xl bg-white/5">Operator Training Systems</span>
-      <span class="pill px-4 py-2 rounded-xl bg-white/5">Leak Detection & Optimisation</span>
+    <div class="mt-6 overflow-x-auto glass rounded-2xl">
+      <table class="min-w-[980px] w-full text-sm">
+        <thead class="text-xs uppercase text-slate-300 border-b border-white/10">
+          <tr>
+            <th class="text-left p-4">Attack vector</th>
+            <th class="text-left p-4">Where it hits</th>
+            <th class="text-left p-4">Impact</th>
+            <th class="text-left p-4">My control package</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-white/10 text-slate-200">
+          <tr>
+            <td class="p-4">Credential theft / vendor access abuse</td>
+            <td class="p-4">Web dashboard, admin consoles, jump hosts</td>
+            <td class="p-4">Account takeover → operational visibility loss</td>
+            <td class="p-4">
+              IAM hardening, MFA, RBAC, PAM for engineers/vendors, just-in-time access, session logging
+            </td>
+          </tr>
+          <tr>
+            <td class="p-4">Lateral movement IT → OT</td>
+            <td class="p-4">Integration layer (APIs/DMZ), data hub connectivity</td>
+            <td class="p-4">Pivot into OT segments; compromise safety posture</td>
+            <td class="p-4">
+              Secure reference architecture (zones/conduits), DMZ design, firewall rules, secure API gateway, least privilege connectivity
+            </td>
+          </tr>
+          <tr>
+            <td class="p-4">Telemetry injection / data tampering</td>
+            <td class="p-4">SCADA feeds, historian/data hub, model inputs</td>
+            <td class="p-4">False leak alerts or missed events; bad decisions</td>
+            <td class="p-4">
+              Data integrity checks, signing/validation, config change control, monitoring & alerting, audit trails
+            </td>
+          </tr>
+          <tr>
+            <td class="p-4">Cloud/web misconfiguration</td>
+            <td class="p-4">Cloud hosting, storage, APIs, identity provider</td>
+            <td class="p-4">Exposure of sensitive network data; compromise</td>
+            <td class="p-4">
+              Cloud security baseline, web/API testing, secure CI/CD guidance, secrets management, logging & SIEM integration
+            </td>
+          </tr>
+          <tr>
+            <td class="p-4">Ransomware / availability disruption</td>
+            <td class="p-4">Servers, data stores, dashboards, integration nodes</td>
+            <td class="p-4">Operational disruption; delayed response to incidents</td>
+            <td class="p-4">
+              Resilience controls: backup strategy, restore testing, immutable backups, incident response playbooks, tabletop exercises
+            </td>
+          </tr>
+          <tr>
+            <td class="p-4">Regulatory / audit gaps (GCC)</td>
+            <td class="p-4">Tender submissions, assurance reports, vendor risk</td>
+            <td class="p-4">Lost deals; deployment delays; rework</td>
+            <td class="p-4">
+              “Compliance evidence pack”: security architecture diagrams, risk assessment, control mapping to NESA/DESC/ISR/NCA/ISO/IEC 62443
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ATTACK VECTORS -->
-<section id="risk" class="max-w-6xl mx-auto px-6 py-20">
-  <h2 class="text-3xl font-semibold">Where I See Risk in Utility Environments</h2>
-  <p class="mt-4 text-slate-400 max-w-3xl">
-    In water, oil & gas, and power environments, I repeatedly see the same attack patterns.
-  </p>
+  <!-- Offering -->
+  <section id="offer" class="max-w-6xl mx-auto px-4 py-14">
+    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl md:text-3xl font-semibold">4) My Solution Offering (Packaged for Your Clients)</h2>
+        <p class="mt-2 text-slate-300">
+          This is designed to be sold as a repeatable add-on: <span class="text-slate-100 font-medium">“Secure-by-Design Deployment”</span>.
+          You can white-label it or co-sell it.
+        </p>
 
-  <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <div class="mt-7 grid md:grid-cols-2 gap-4">
+          <div class="glass rounded-2xl p-6">
+            <div class="text-xs text-slate-400">Package A</div>
+            <div class="mt-1 text-lg font-semibold">OT / Digital Twin Security Assessment</div>
+            <ul class="mt-3 text-sm text-slate-300 space-y-2">
+              <li>Threat model: SCADA/APIs/web/training environment</li>
+              <li>Zone & conduit architecture review (DMZ/segmentation)</li>
+              <li>Integration risk assessment + remediation plan</li>
+              <li>Quick wins + 90-day roadmap</li>
+            </ul>
+          </div>
 
-    <div class="glass p-6 rounded-2xl">
-      <div class="text-lg font-semibold accent">Compromise IT → Move Laterally into OT</div>
-      <p class="mt-4 text-slate-400 text-sm">
-        I often see attackers enter through email or VPN, then pivot through connected systems
-        like digital twins to reach SCADA or engineering workstations.
-      </p>
+          <div class="glass rounded-2xl p-6">
+            <div class="text-xs text-slate-400">Package B</div>
+            <div class="mt-1 text-lg font-semibold">Identity & Privileged Access (Engineers/Vendors)</div>
+            <ul class="mt-3 text-sm text-slate-300 space-y-2">
+              <li>MFA + conditional access design</li>
+              <li>RBAC model for operators/engineers/instructors</li>
+              <li>PAM/JIT access & session controls</li>
+              <li>Audit trails for admin actions</li>
+            </ul>
+          </div>
+
+          <div class="glass rounded-2xl p-6">
+            <div class="text-xs text-slate-400">Package C</div>
+            <div class="mt-1 text-lg font-semibold">Cloud/Web/API Hardening</div>
+            <ul class="mt-3 text-sm text-slate-300 space-y-2">
+              <li>Cloud security baseline & configuration checks</li>
+              <li>API security review & web app testing</li>
+              <li>Secrets management & secure deployment guidance</li>
+              <li>Logging/SIEM integration</li>
+            </ul>
+          </div>
+
+          <div class="glass rounded-2xl p-6">
+            <div class="text-xs text-slate-400">Package D</div>
+            <div class="mt-1 text-lg font-semibold">GCC Compliance Evidence Pack</div>
+            <ul class="mt-3 text-sm text-slate-300 space-y-2">
+              <li>Security architecture diagrams + control mapping</li>
+              <li>Risk register + mitigation narrative for tenders</li>
+              <li>Third-party assurance wording (vendor security)</li>
+              <li>Operational resilience + incident readiness</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:w-[360px] space-y-4">
+        <div class="glass rounded-2xl p-6">
+          <div class="text-xs text-slate-400">How this helps SSL sell</div>
+          <div class="mt-2 text-sm text-slate-200 leading-relaxed">
+            <span class="font-semibold">Instead of answering cyber questions ad-hoc</span>, you give clients a
+            structured security story + deliverables. It de-risks procurement, speeds approvals, and increases deal size.
+          </div>
+        </div>
+
+        <div class="glass rounded-2xl p-6">
+          <div class="text-xs text-slate-400">Suggested partnership packaging</div>
+          <ul class="mt-3 text-sm text-slate-300 space-y-2">
+            <li><span class="text-emerald-400">•</span> “Secure Deployment” included in every proposal</li>
+            <li><span class="text-emerald-400">•</span> Optional premium: cloud hardening + annual assurance</li>
+            <li><span class="text-emerald-400">•</span> Co-branded: GCC compliance readiness add-on</li>
+          </ul>
+        </div>
+
+        <a href="#plan" class="block text-center text-xs px-4 py-3 rounded-xl bg-white/10 hover:bg-white/15 pill">
+          Next: 30-minute meeting plan →
+        </a>
+      </div>
     </div>
+  </section>
 
-    <div class="glass p-6 rounded-2xl">
-      <div class="text-lg font-semibold accent">Credential & Vendor Access Abuse</div>
-      <p class="mt-4 text-slate-400 text-sm">
-        Shared admin accounts, weak MFA, or broad remote vendor access create direct exposure.
-      </p>
+  <!-- 30-min flow -->
+  <section id="plan" class="max-w-6xl mx-auto px-4 py-14">
+    <div class="glass rounded-3xl p-8 md:p-10">
+      <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
+        <div class="max-w-3xl">
+          <h2 class="text-2xl md:text-3xl font-semibold">5) 30-Minute Talk Track</h2>
+          <p class="mt-2 text-slate-300">
+            Use this as your run-sheet. Keep it tight, executive, and anchored on risk → control → commercial outcome.
+          </p>
+
+          <div class="mt-6 space-y-4">
+            <div class="rounded-2xl bg-white/5 p-5 pill">
+              <div class="text-xs text-slate-400">0–5 mins</div>
+              <div class="mt-1 font-semibold">Frame the problem: OT cyber is now a procurement gate</div>
+              <div class="mt-2 text-sm text-slate-300">
+                Clients ask security questions because digital twins connect to SCADA/APIs, expose dashboards, and rely on trusted data.
+              </div>
+            </div>
+
+            <div class="rounded-2xl bg-white/5 p-5 pill">
+              <div class="text-xs text-slate-400">5–12 mins</div>
+              <div class="mt-1 font-semibold">Show the attack vectors (and why they’re predictable)</div>
+              <div class="mt-2 text-sm text-slate-300">
+                Credential abuse, OT/IT pivoting, telemetry tampering, cloud misconfig, ransomware resilience, GCC compliance.
+              </div>
+            </div>
+
+            <div class="rounded-2xl bg-white/5 p-5 pill">
+              <div class="text-xs text-slate-400">12–20 mins</div>
+              <div class="mt-1 font-semibold">Map product touchpoints → controls</div>
+              <div class="mt-2 text-sm text-slate-300">
+                Walk through the “Attack Vector → Touchpoint → Control” table and highlight 2–3 high value controls:
+                segmentation/DMZ, PAM/JIT for vendors, integrity + audit trails.
+              </div>
+            </div>
+
+            <div class="rounded-2xl bg-white/5 p-5 pill">
+              <div class="text-xs text-slate-400">20–26 mins</div>
+              <div class="mt-1 font-semibold">Present the packaged offering</div>
+              <div class="mt-2 text-sm text-slate-300">
+                4 packages: assessment, identity/PAM, cloud/API hardening, GCC evidence pack.
+                Emphasise “repeatable, proposal-ready”.
+              </div>
+            </div>
+
+            <div class="rounded-2xl bg-white/5 p-5 pill">
+              <div class="text-xs text-slate-400">26–30 mins</div>
+              <div class="mt-1 font-semibold">Close with next steps</div>
+              <div class="mt-2 text-sm text-slate-300">
+                Agree on: (1) target client segment, (2) a 2-week pilot assessment, (3) how to package it in proposals, (4) delivery model (white-label or co-sell).
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="md:w-[360px] space-y-4">
+          <div class="glass rounded-2xl p-6">
+            <div class="text-xs text-slate-400">Questions to ask Nick</div>
+            <ul class="mt-3 text-sm text-slate-300 space-y-2">
+              <li><span class="text-emerald-400">•</span> Which cyber questions show up most in bids?</li>
+              <li><span class="text-emerald-400">•</span> Do clients require IEC 62443 / ISO evidence?</li>
+              <li><span class="text-emerald-400">•</span> How is remote vendor access done today?</li>
+              <li><span class="text-emerald-400">•</span> Cloud vs on-prem preferences in GCC clients?</li>
+              <li><span class="text-emerald-400">•</span> Any security incidents / near misses to learn from?</li>
+            </ul>
+          </div>
+
+          <div class="glass rounded-2xl p-6">
+            <div class="text-xs text-slate-400">Strong final line</div>
+            <div class="mt-2 text-sm text-slate-200 leading-relaxed">
+              “We’ll make this product <span class="font-semibold">safe to connect</span> in critical infrastructure —
+              and give your sales team a <span class="font-semibold">repeatable cyber story</span> for GCC tenders.”
+            </div>
+          </div>
+
+          <div class="rounded-2xl bg-emerald-500/15 p-6 pill">
+            <div class="text-xs text-slate-200">Optional add-on slide (if time)</div>
+            <div class="mt-2 text-sm text-slate-100 font-semibold">“Secure Deployment Checklist”</div>
+            <div class="mt-2 text-sm text-slate-200">
+              One-page checklist your client can attach to procurement pack: segmentation, IAM/PAM, monitoring, backup, compliance evidence.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="mt-10 text-xs text-slate-400">
+        Built for GitHub Pages. No server required. One file. Works offline after first load.
+      </div>
     </div>
+  </section>
 
-    <div class="glass p-6 rounded-2xl">
-      <div class="text-lg font-semibold accent">Digital Twin Data Manipulation</div>
-      <p class="mt-4 text-slate-400 text-sm">
-        If telemetry or model configurations are altered, leak detection and optimisation
-        outputs can become unreliable.
-      </p>
+  <footer class="max-w-6xl mx-auto px-4 py-10 text-xs text-slate-500">
+    <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      <div>© <span id="year"></span> • Industrial Cybersecurity Pitch Page</div>
+      <div class="flex gap-3">
+        <a class="hover:text-slate-300" href="#attack">Top</a>
+        <a class="hover:text-slate-300" href="#mapping">Map</a>
+        <a class="hover:text-slate-300" href="#offer">Offering</a>
+      </div>
     </div>
+  </footer>
 
-    <div class="glass p-6 rounded-2xl">
-      <div class="text-lg font-semibold accent">Cloud & API Misconfiguration</div>
-      <p class="mt-4 text-slate-400 text-sm">
-        Web dashboards and APIs expose operational data if not hardened properly.
-      </p>
-    </div>
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    <div class="glass p-6 rounded-2xl">
-      <div class="text-lg font-semibold accent">Ransomware & Availability Risk</div>
-      <p class="mt-4 text-slate-400 text-sm">
-        I help ensure digital twin systems are resilient and recoverable if targeted.
-      </p>
-    </div>
-
-    <div class="glass p-6 rounded-2xl">
-      <div class="text-lg font-semibold accent">GCC Compliance Pressure</div>
-      <p class="mt-4 text-slate-400 text-sm">
-        I align deployments to NESA, DESC, ISR, NCA, ISO and IEC 62443 expectations.
-      </p>
-    </div>
-
-  </div>
-</section>
-
-<!-- PRODUCT VIEW -->
-<section id="product" class="max-w-6xl mx-auto px-6 py-20">
-  <div class="glass rounded-3xl p-12">
-    <h2 class="text-3xl font-semibold">How I View Your Product in the Architecture</h2>
-
-    <p class="mt-6 text-slate-400 max-w-3xl">
-      Your digital twin sits between SCADA, asset systems, GIS and web dashboards.
-      That means it becomes a convergence layer between IT and OT.
-    </p>
-
-    <div class="mt-10 grid md:grid-cols-5 gap-4 text-sm">
-      <div class="pill bg-white/5 p-4 rounded-xl text-center">SCADA</div>
-      <div class="pill bg-white/5 p-4 rounded-xl text-center">APIs</div>
-      <div class="pill bg-white/5 p-4 rounded-xl text-center">Data Hub</div>
-      <div class="pill bg-white/5 p-4 rounded-xl text-center">GIS</div>
-      <div class="pill bg-white/5 p-4 rounded-xl text-center">Web Users</div>
-    </div>
-
-    <p class="mt-8 text-slate-400 text-sm">
-      My role is to ensure this integration never becomes a bridge into OT.
-    </p>
-  </div>
-</section>
-
-<!-- SOLUTION -->
-<section id="solution" class="max-w-6xl mx-auto px-6 py-20">
-  <h2 class="text-3xl font-semibold">How I Secure This Deployment</h2>
-
-  <div class="mt-10 grid md:grid-cols-2 gap-6">
-
-    <div class="glass p-8 rounded-2xl">
-      <div class="text-lg font-semibold green-accent">Secure Architecture & Segmentation</div>
-      <ul class="mt-4 text-slate-400 text-sm space-y-2">
-        <li>I design OT/IT zoning and DMZ controls</li>
-        <li>I ensure data flows are least privilege and controlled</li>
-        <li>I prevent lateral movement into SCADA</li>
-      </ul>
-    </div>
-
-    <div class="glass p-8 rounded-2xl">
-      <div class="text-lg font-semibold green-accent">Identity & Privileged Access</div>
-      <ul class="mt-4 text-slate-400 text-sm space-y-2">
-        <li>I implement MFA & RBAC</li>
-        <li>I enforce just-in-time privileged access</li>
-        <li>I secure vendor and engineer sessions</li>
-      </ul>
-    </div>
-
-    <div class="glass p-8 rounded-2xl">
-      <div class="text-lg font-semibold green-accent">Cloud & API Hardening</div>
-      <ul class="mt-4 text-slate-400 text-sm space-y-2">
-        <li>I review cloud configurations</li>
-        <li>I secure APIs & secrets</li>
-        <li>I integrate monitoring & logging</li>
-      </ul>
-    </div>
-
-    <div class="glass p-8 rounded-2xl">
-      <div class="text-lg font-semibold green-accent">GCC Compliance Readiness</div>
-      <ul class="mt-4 text-slate-400 text-sm space-y-2">
-        <li>I prepare architecture & risk documentation</li>
-        <li>I map controls to regulatory frameworks</li>
-        <li>I help you win regulated contracts</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-
-<!-- PLAN -->
-<section id="plan" class="max-w-6xl mx-auto px-6 py-20">
-  <div class="glass rounded-3xl p-12">
-    <h2 class="text-3xl font-semibold">How I Will Run This 30-Minute Discussion</h2>
-
-    <div class="mt-8 space-y-6 text-slate-400 text-sm">
-      <div><strong class="text-white">0–5 mins:</strong> Frame OT cyber risk in digital twin deployments.</div>
-      <div><strong class="text-white">5–15 mins:</strong> Walk through attack vectors and real-world pivot scenarios.</div>
-      <div><strong class="text-white">15–25 mins:</strong> Show how I secure architecture, identity, cloud and compliance.</div>
-      <div><strong class="text-white">25–30 mins:</strong> Agree next step: pilot assessment + packaging into your proposals.</div>
-    </div>
-
-    <div class="mt-10 soft-accent p-6 rounded-2xl text-sm">
-      <strong class="text-white">My closing message:</strong><br/>
-      I don’t just add cybersecurity. I make your digital twin safe to connect in critical infrastructure —
-      and give your sales team a repeatable, credible security story.
-    </div>
-  </div>
-</section>
-
-<footer class="text-center text-xs text-slate-500 py-10">
-  © <script>document.write(new Date().getFullYear())</script> | Industrial Cybersecurity Strategy
-</footer>
-
+    // Presentation mode: increases font sizes + spacing slightly
+    const btn = document.getElementById('presentBtn');
+    let isPresent = false;
+    btn.addEventListener('click', () => {
+      isPresent = !isPresent;
+      document.body.classList.toggle('text-[17px]');
+      document.body.classList.toggle('leading-relaxed');
+      btn.textContent = isPresent ? 'Exit Presentation Mode' : 'Presentation Mode';
+    });
+  </script>
 </body>
 </html>
